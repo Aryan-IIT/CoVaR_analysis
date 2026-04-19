@@ -51,6 +51,8 @@
       
     
     
+      <link rel="stylesheet" href="../assets/stylesheets/playground.css">
+    
     <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
@@ -461,8 +463,11 @@
 
 
 <h1 id="interactive-playground">Interactive Playground<a class="headerlink" href="#interactive-playground" title="Permanent link">&para;</a></h1>
-<p>An interactive VaR/CVaR explorer will be added here later.</p>
-<p>For now, this page is intentionally left as a placeholder so the site structure is ready for future work.</p>
+<p>Use this lightweight explorer to see how historical VaR, historical CVaR, and tail amplification change as the 5% tail level is moved between 1% and 10%.</p>
+<p>The data is precomputed from daily log returns for NIFTY 50 and HUL, so the browser only reads a static JSON file.</p>
+<div id="var-playground" class="var-playground">
+  <div class="pg-loading">Loading playground data...</div>
+</div>
 
 
 
@@ -528,6 +533,8 @@
       <script src="../assets/javascripts/bundle.79ae519e.min.js"></script>
       
         <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+      
+        <script src="../assets/javascripts/playground.js"></script>
       
     
   </body>

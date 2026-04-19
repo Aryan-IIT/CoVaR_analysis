@@ -1,0 +1,222 @@
+.var-playground {
+  margin-top: 1rem;
+}
+
+.pg-panel {
+  border: 1px solid var(--md-default-fg-color--lightest);
+  border-radius: 8px;
+  padding: 1rem;
+  background: var(--md-default-bg-color);
+}
+
+.pg-controls {
+  display: grid;
+  grid-template-columns: minmax(180px, 0.9fr) minmax(160px, 0.8fr) minmax(340px, 2fr);
+  gap: 0.9rem;
+  align-items: end;
+  margin-bottom: 1rem;
+}
+
+.pg-compare-mode .pg-alpha-control {
+  grid-column: span 2;
+}
+
+.pg-control label,
+.pg-mode-label {
+  display: block;
+  margin-bottom: 0.35rem;
+  font-size: 0.78rem;
+  font-weight: 700;
+  color: var(--md-default-fg-color--light);
+}
+
+.pg-control select,
+.pg-control input[type="range"] {
+  width: 100%;
+}
+
+.pg-mode-buttons {
+  display: flex;
+  gap: 0.4rem;
+  flex-wrap: wrap;
+}
+
+.pg-mode-buttons button {
+  border: 1px solid var(--md-default-fg-color--lightest);
+  border-radius: 8px;
+  padding: 0.42rem 0.7rem;
+  background: var(--md-default-bg-color);
+  color: var(--md-default-fg-color);
+  cursor: pointer;
+  font: inherit;
+}
+
+.pg-mode-buttons button.active {
+  border-color: var(--md-primary-fg-color);
+  background: var(--md-primary-fg-color);
+  color: var(--md-primary-bg-color);
+}
+
+.pg-alpha-row {
+  display: grid;
+  grid-template-columns: minmax(220px, 1fr) 5.5rem 4.5rem;
+  gap: 0.65rem;
+  align-items: center;
+}
+
+.pg-alpha-row input[type="range"] {
+  min-width: 220px;
+}
+
+.pg-alpha-input {
+  width: 100%;
+  border: 1px solid var(--md-default-fg-color--lightest);
+  border-radius: 8px;
+  padding: 0.35rem 0.45rem;
+  background: var(--md-default-bg-color);
+  color: var(--md-default-fg-color);
+  font: inherit;
+  text-align: right;
+}
+
+.pg-alpha-input.has-error {
+  border-color: #b00020;
+}
+
+.pg-alpha-value {
+  font-weight: 700;
+  color: var(--md-primary-fg-color);
+}
+
+.pg-alpha-error {
+  min-height: 1rem;
+  margin-top: 0.25rem;
+  color: #b00020;
+  font-size: 0.74rem;
+  line-height: 1.25;
+}
+
+.pg-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 1rem;
+  margin: 1rem 0;
+}
+
+.pg-card {
+  border: 1px solid var(--md-default-fg-color--lightest);
+  border-radius: 8px;
+  padding: 0.85rem;
+  background: color-mix(in srgb, var(--md-default-bg-color) 94%, var(--md-primary-fg-color) 6%);
+}
+
+.pg-card h3 {
+  margin: 0 0 0.7rem;
+  font-size: 1rem;
+}
+
+.pg-metrics {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0.5rem;
+  margin-bottom: 0.8rem;
+}
+
+.pg-metric {
+  border-radius: 8px;
+  padding: 0.55rem;
+  background: var(--md-default-bg-color);
+}
+
+.pg-metric span {
+  display: block;
+  font-size: 0.72rem;
+  color: var(--md-default-fg-color--light);
+}
+
+.pg-metric strong {
+  display: block;
+  margin-top: 0.15rem;
+  font-size: 1rem;
+}
+
+.pg-chart {
+  width: 100%;
+  min-height: 220px;
+}
+
+.pg-chart-title {
+  margin: 0.75rem 0 0.35rem;
+  font-size: 0.84rem;
+  font-weight: 700;
+  color: var(--md-default-fg-color--light);
+}
+
+.pg-note {
+  margin-top: 1rem;
+  border-left: 3px solid var(--md-primary-fg-color);
+  padding: 0.75rem 0.9rem;
+  background: color-mix(in srgb, var(--md-default-bg-color) 92%, var(--md-primary-fg-color) 8%);
+  border-radius: 0 8px 8px 0;
+}
+
+.pg-secondary-note {
+  margin-top: 0.85rem;
+  border-top: 1px solid var(--md-default-fg-color--lightest);
+  padding-top: 0.7rem;
+  color: var(--md-default-fg-color--light);
+  font-size: 0.82rem;
+  line-height: 1.45;
+}
+
+.pg-loading,
+.pg-error {
+  border: 1px solid var(--md-default-fg-color--lightest);
+  border-radius: 8px;
+  padding: 1rem;
+  background: var(--md-default-bg-color);
+}
+
+.pg-error {
+  color: #b00020;
+}
+
+.pg-axis-label,
+.pg-tick {
+  fill: var(--md-default-fg-color--light);
+  font-size: 10px;
+}
+
+.pg-line-var {
+  stroke: #1f77b4;
+}
+
+.pg-line-cvar {
+  stroke: #c0392b;
+}
+
+.pg-line-amp {
+  stroke: #5b8e7d;
+}
+
+@media (max-width: 760px) {
+  .pg-controls {
+    grid-template-columns: 1fr;
+  }
+
+  .pg-compare-mode .pg-alpha-control {
+    grid-column: auto;
+  }
+
+  .pg-alpha-row {
+    grid-template-columns: 1fr 5.5rem;
+  }
+
+  .pg-alpha-value {
+    grid-column: 1 / -1;
+  }
+
+  .pg-metrics {
+    grid-template-columns: 1fr;
+  }
+}

@@ -30,3 +30,7 @@ first_analysis.ipynb
 datasets/trial/
 datasets/trio2/
 
+.vscode/
+trio1_analysis.html
+trio2_weekly_analysis.html
+

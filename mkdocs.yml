@@ -1,0 +1,37 @@
+site_name: CoVaR Analysis
+site_description: Static project website for VaR and CVaR tail-risk analysis.
+repo_url: https://github.com/Aryan-IIT/CoVaR_analysis
+
+theme:
+  name: material
+  language: en
+  features:
+    - navigation.sections
+    - navigation.top
+    - content.code.copy
+  palette:
+    scheme: default
+    primary: indigo
+    accent: blue
+
+nav:
+  - Home: index.md
+  - Methodology: methodology.md
+  - Trio 1 Highlights: trio1.md
+  - Trio 2 Highlights: trio2.md
+  - Key Insights: insights.md
+  - Interactive Playground: playground.md
+  - Reproducibility: reproducibility.md
+
+markdown_extensions:
+  - admonition
+  - toc:
+      permalink: true
+  - pymdownx.arithmatex:
+      generic: true
+  - pymdownx.superfences
+
+extra_javascript:
+  - https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js
+
+copyright: This project compares VaR and CVaR under historical and Gaussian assumptions.

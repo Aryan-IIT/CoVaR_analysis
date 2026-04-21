@@ -1,6 +1,6 @@
 # Reproducibility
 
-The analysis was done in Python notebooks using shared risk metric functions.
+The analysis was done in Python notebooks using shared risk metric functions. Together, these files implement the VaR/CVaR framework used to address the project tasks: extend VaR analysis to CVaR, analyze extreme tail losses, and compare the two measures.
 
 ## Main Files
 
@@ -14,4 +14,4 @@ The GitHub repository is the source for the project code, notebooks, and final d
 
 [Aryan-IIT/CoVaR_analysis](https://github.com/Aryan-IIT/CoVaR_analysis)
 
-The notebooks clean the data, compute log returns, call `risk_metrics.py`, and generate the comparison tables and plots used in this website.
+The notebooks clean the data, compute log returns, call `risk_metrics.py`, and generate the tables and plots used in this website to support the project statement.

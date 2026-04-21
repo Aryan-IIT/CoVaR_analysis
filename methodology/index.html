@@ -706,52 +706,63 @@
 
 
 <h1 id="methodology">Methodology<a class="headerlink" href="#methodology" title="Permanent link">&para;</a></h1>
-<p>The project uses a 5% tail level throughout. All VaR and CVaR values are reported as positive loss magnitudes, even though the underlying tail returns are negative.</p>
+<p>The project uses a 5% tail level throughout (however, in the <a href="../playground/">Interactive Playground</a>, you can see how different confidence/tail levels change and amplify risk). All VaR and CVaR values are reported as positive loss magnitudes, even though the underlying tail returns are negative.</p>
 <h2 id="data-and-preprocessing">Data and Preprocessing<a class="headerlink" href="#data-and-preprocessing" title="Permanent link">&para;</a></h2>
-<p>The notebooks load asset price data, detect the date and price columns, clean missing values, sort observations by date, and remove duplicate dates.</p>
+<p>The notebooks load asset price data, detect the date and price columns, clean missing values, sort observations by date, and remove duplicate dates. The sample windows were also chosen to be long enough to provide a reasonable number of tail observations, which is important for making historical VaR, CVaR, and related tail metrics sufficiently informative.</p>
 <p>Returns are calculated as log returns:</p>
 <div class="arithmatex">\[
 r_t = \ln\left(\frac{P_t}{P_{t-1}}\right)
 \]</div>
+<p>where <span class="arithmatex">\(r_t\)</span> is the log return at time <span class="arithmatex">\(t\)</span>, <span class="arithmatex">\(P_t\)</span> is the asset price at time <span class="arithmatex">\(t\)</span>, and <span class="arithmatex">\(P_{t-1}\)</span> is the asset price in the previous period.</p>
 <h2 id="daily-vs-weekly-analysis">Daily vs Weekly Analysis<a class="headerlink" href="#daily-vs-weekly-analysis" title="Permanent link">&para;</a></h2>
 <p>Trio 1 uses daily log returns for NIFTY 50, HUL, and Adani Enterprises.</p>
 <p>Trio 2 starts from daily prices but converts them to weekly prices using the last available closing price of each week. Weekly log returns are then computed from those weekly prices.</p>
+<p>Using both daily and weekly settings helps test the VaR/CVaR comparison under different frequencies rather than only one return horizon.</p>
 <h2 id="historical-var">Historical VaR<a class="headerlink" href="#historical-var" title="Permanent link">&para;</a></h2>
 <p>Historical VaR is the empirical 5th percentile of returns:</p>
 <div class="arithmatex">\[
 VaR_{0.05}^{hist} = -Q_{0.05}(r)
 \]</div>
+<p>where <span class="arithmatex">\(VaR_{0.05}^{hist}\)</span> is the historical Value-at-Risk at the 5% tail level, <span class="arithmatex">\(0.05\)</span> is the tail probability, <span class="arithmatex">\(hist\)</span> indicates that the measure is based on historical data, <span class="arithmatex">\(Q_{0.05}(r)\)</span> is the 5th percentile (quantile) of the return distribution, and <span class="arithmatex">\(r\)</span> denotes the return series.</p>
 <p>It is empirical, so it uses the observed return distribution directly.</p>
+<p>This is the starting point of the analysis. VaR tells us where the bad tail begins, but not how severe losses become after that point.</p>
 <h2 id="historical-cvar">Historical CVaR<a class="headerlink" href="#historical-cvar" title="Permanent link">&para;</a></h2>
 <p>Historical CVaR is the average loss conditional on returns being at or below the historical VaR threshold:</p>
 <div class="arithmatex">\[
 CVaR_{0.05}^{hist} = -E[r \mid r \le Q_{0.05}(r)]
 \]</div>
+<p>where <span class="arithmatex">\(CVaR_{0.05}^{hist}\)</span> is the historical Conditional Value-at-Risk at the 5% tail level, <span class="arithmatex">\(E[\cdot]\)</span> denotes expectation (average), <span class="arithmatex">\(r\)</span> is the return series, <span class="arithmatex">\(\mid\)</span> means “conditional on,” and <span class="arithmatex">\(Q_{0.05}(r)\)</span> is the 5th percentile of returns.</p>
 <p>This measures the average severity of the worst 5% return outcomes.</p>
+<p>This is how VaR is extended to CVaR in the project. Instead of stopping at the cutoff, the analysis measures the average loss once the return has already entered the tail.</p>
 <h2 id="parametric-var">Parametric VaR<a class="headerlink" href="#parametric-var" title="Permanent link">&para;</a></h2>
 <p>Parametric VaR assumes returns are Gaussian and uses the sample mean and sample standard deviation:</p>
 <div class="arithmatex">\[
 VaR_{0.05}^{param} = -(\mu + \sigma z_{0.05})
 \]</div>
-<p>where <span class="arithmatex">\(z_{0.05}\)</span> is the 5th percentile of the standard normal distribution.</p>
+<p>where <span class="arithmatex">\(VaR_{0.05}^{param}\)</span> is the parametric Value-at-Risk at the 5% tail level, <span class="arithmatex">\(param\)</span> indicates that the measure is model-based, <span class="arithmatex">\(\mu\)</span> is the sample mean of returns, <span class="arithmatex">\(\sigma\)</span> is the sample standard deviation of returns, and <span class="arithmatex">\(z_{0.05}\)</span> is the 5th percentile of the standard normal distribution.</p>
 <h2 id="parametric-cvar">Parametric CVaR<a class="headerlink" href="#parametric-cvar" title="Permanent link">&para;</a></h2>
 <p>Parametric CVaR is the analytical expected shortfall under the normal assumption:</p>
 <div class="arithmatex">\[
 CVaR_{0.05}^{param} = -\left(\mu - \sigma \frac{\phi(z_{0.05})}{0.05}\right)
 \]</div>
-<p>where <span class="arithmatex">\(\phi\)</span> is the standard normal density.</p>
+<p>where <span class="arithmatex">\(CVaR_{0.05}^{param}\)</span> is the parametric Conditional Value-at-Risk at the 5% tail level, <span class="arithmatex">\(\mu\)</span> is the sample mean of returns, <span class="arithmatex">\(\sigma\)</span> is the sample standard deviation of returns, <span class="arithmatex">\(z_{0.05}\)</span> is the 5th percentile of the standard normal distribution, and <span class="arithmatex">\(\phi(\cdot)\)</span> is the standard normal probability density function evaluated at <span class="arithmatex">\(z_{0.05}\)</span>.</p>
+<p>The parametric versions are included so that VaR and CVaR can also be compared under a model-based Gaussian assumption, not only under observed historical data.</p>
 <h2 id="tail-gap">Tail Gap<a class="headerlink" href="#tail-gap" title="Permanent link">&para;</a></h2>
 <p>Tail Gap compares CVaR and VaR in absolute terms:</p>
 <div class="arithmatex">\[
 \text{Tail Gap} = \text{CVaR} - \text{VaR}
 \]</div>
+<p>where Tail Gap is the absolute difference between Conditional Value-at-Risk and Value-at-Risk.</p>
 <p>A larger gap means losses become much worse after the VaR threshold is crossed.</p>
+<p>This directly supports the extreme-tail-loss part of the project by showing how much deeper losses become beyond the VaR cutoff.</p>
 <h2 id="tail-amplification">Tail Amplification<a class="headerlink" href="#tail-amplification" title="Permanent link">&para;</a></h2>
 <p>Tail Amplification compares CVaR and VaR in relative terms:</p>
 <div class="arithmatex">\[
 \text{Tail Amplification} = \frac{\text{CVaR}}{\text{VaR}}
 \]</div>
+<p>where Tail Amplification is the ratio of Conditional Value-at-Risk to Value-at-Risk.</p>
 <p>It shows how many times larger the average tail loss is compared with the VaR cutoff.</p>
+<p>This gives another way to compare VaR and CVaR, especially when assets differ in overall volatility.</p>
 <h2 id="limitations">Limitations<a class="headerlink" href="#limitations" title="Permanent link">&para;</a></h2>
 <p>The historical method depends on the observed sample and may miss events that did not occur during the period. The parametric method is cleaner mathematically but assumes Gaussian returns, which may understate heavy-tail behavior in real markets.</p>
 

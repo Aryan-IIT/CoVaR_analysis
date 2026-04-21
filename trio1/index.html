@@ -603,18 +603,19 @@
 <li>Adani Enterprises: volatile stock</li>
 </ul>
 <p>The aim is to see how tail risk changes when moving from broad market exposure to individual stock exposure.</p>
+<p>Trio 1 is used as a direct test of the project statement: compare VaR and CVaR for assets with different risk profiles, examine how losses deepen beyond the VaR threshold, and show why CVaR becomes more informative when tail risk is strong.</p>
 <h2 id="var-and-cvar-comparison">VaR and CVaR Comparison<a class="headerlink" href="#var-and-cvar-comparison" title="Permanent link">&para;</a></h2>
 <p><img alt="Trio 1 VaR and CVaR comparison" src="../assets/images/trio1/comparison.png" /></p>
-<p>Adani Enterprises shows the strongest downside tail risk in this trio. HUL lies between the index and Adani, while NIFTY 50 is relatively contained because of diversification.</p>
+<p>This comparison is the first step in extending the analysis from VaR to CVaR. Adani Enterprises shows the strongest downside tail risk in this trio, HUL lies between the index and Adani, and NIFTY 50 is relatively contained because diversification reduces the depth of the tail.</p>
 <h2 id="tail-gap">Tail Gap<a class="headerlink" href="#tail-gap" title="Permanent link">&para;</a></h2>
 <p><img alt="Trio 1 tail gap" src="../assets/images/trio1/tail_gap.png" /></p>
-<p>The tail gap shows how much worse average tail losses become after the VaR threshold is crossed. A larger gap means VaR alone misses more of the loss severity.</p>
+<p>The tail gap shows how much worse average tail losses become after the VaR threshold is crossed. This is where the extreme-tail-loss part of the project becomes clearer: a larger gap means VaR alone misses more of the severity inside the tail.</p>
 <h2 id="tail-amplification">Tail Amplification<a class="headerlink" href="#tail-amplification" title="Permanent link">&para;</a></h2>
 <p><img alt="Trio 1 tail amplification" src="../assets/images/trio1/tail_amplification.png" /></p>
-<p>Tail amplification gives the relative version of the same idea. It helps compare whether CVaR is much larger than VaR for each asset, even when the absolute risk levels differ.</p>
+<p>Tail amplification gives the relative version of the same idea. It helps compare whether CVaR is much larger than VaR for each asset, even when the absolute risk levels differ, so it strengthens the VaR-versus-CVaR comparison.</p>
 <h2 id="adani-tail-shape">Adani Tail Shape<a class="headerlink" href="#adani-tail-shape" title="Permanent link">&para;</a></h2>
 <p><img alt="Adani return distribution" src="../assets/images/trio1/adani.png" /></p>
-<p>Adani’s return distribution makes the tail-risk result easier to see visually. The historical tail severity can differ from the Gaussian parametric estimate, which is why both methods are useful.</p>
+<p>Adani’s return distribution makes the tail result easier to see visually. In the most volatile asset, CVaR becomes especially useful because the loss severity inside the tail can be much worse than the VaR cutoff alone suggests. The historical tail can also differ from the Gaussian estimate, which is why both views are included.</p>
 
 
 

@@ -91,6 +91,7 @@ mkdocs serve
 - `risk_metrics.py`: shared VaR and CVaR functions.
 - `trio1_analysis.ipynb`: daily analysis for Trio 1.
 - `trio2_weekly_analysis.ipynb`: weekly analysis for Trio 2.
+- `data_extraction/two_years.py` and `data_extraction/five_years.py`: is used to extract the data of the used stocks.
 - `build_playground_data.py`: precomputes data for the interactive playground.
 - `docs/`: MkDocs website content.
 
